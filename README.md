@@ -1,2 +1,2 @@
 # first-lab
-##Чтобы запустить `go run cmd/main.go`
+#Чтобы запустить `go run cmd/main.go`
