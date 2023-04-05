@@ -20,6 +20,7 @@ func main() {
 func run() {
 	cfg, _ := configs.New()
 	router := transport.Routes()
+	// твои конфиги будут пустые потому что пакет конфига пустой 
 	srv := &http.Server{
 		Addr:    cfg.PORT,
 		Handler: router,
