@@ -5,7 +5,7 @@ import (
 
 	"github.com/alibekabdrakhman1/first-lab/internal/service"
 )
-
+// это должно быть в htpp/user.go
 type IUserHandler interface {
 	Get(http.ResponseWriter, *http.Request)
 	Create(http.ResponseWriter, *http.Request)

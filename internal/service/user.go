@@ -12,7 +12,7 @@ type IUserService interface {
 	Delete(id int) error
 	GetAll() ([]model.User, error)
 }
-
+// нету конструктора
 type UserService struct {
 	repo repository.Repository
 }
