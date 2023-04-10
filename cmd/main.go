@@ -2,6 +2,9 @@ package main
 
 import (
 	"context"
+	service2 "github.com/alibekabdrakhman1/first-lab/internal/service"
+	storage2 "github.com/alibekabdrakhman1/first-lab/internal/storage"
+	http2 "github.com/alibekabdrakhman1/first-lab/internal/transport/http"
 	"log"
 	"net/http"
 	"os"
@@ -10,7 +13,6 @@ import (
 	"time"
 
 	"github.com/alibekabdrakhman1/first-lab/configs"
-	"github.com/alibekabdrakhman1/first-lab/internal/transport"
 )
 
 func main() {
@@ -19,7 +21,16 @@ func main() {
 
 func run() {
 	cfg, _ := configs.New()
-	router := transport.Routes()
+	storage, err := storage2.New()
+	if err != nil {
+		log.Fatal(err)
+	}
+	service, err := service2.NewManager(storage)
+	if err != nil {
+		log.Fatal(err)
+	}
+	handler := http2.NewHandler(service)
+	router := http2.Routes(handler)
 	srv := &http.Server{
 		Addr:    cfg.PORT,
 		Handler: router,
@@ -37,7 +48,7 @@ func run() {
 
 	<-done
 	log.Print("Server Stopped")
-	
+
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer func() {
 		cancel()
@@ -47,5 +58,5 @@ func run() {
 		log.Fatalf("Server Shutdown Failed:%+v", err)
 	}
 	log.Print("Server Exited Properly")
-	   
+
 }

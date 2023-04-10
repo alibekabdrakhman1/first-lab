@@ -1,0 +1,13 @@
+GET http://localhost:8080/api/users
+Accept: application/json
+
+### Send POST request with json body
+POST http://localhost:8080/api/users/create
+Content-Type: application/json
+
+{
+	"name": "Sagyndyk",
+	"surname": "222",
+	"login": "t",
+	"password": "qwerty123"
+}
