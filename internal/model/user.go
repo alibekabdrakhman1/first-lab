@@ -1,7 +1,7 @@
 package model
 
 type User struct {
-	Id       int    `json:"id"`
+	ID       string `json:"id"`
 	Name     string `json:"name"`
 	Surname  string `json:"surname"`
 	Login    string `json:"login"`

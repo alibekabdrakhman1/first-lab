@@ -1,4 +1,4 @@
-package http
+package handler
 
 import (
 	"encoding/json"
@@ -35,21 +35,24 @@ func (h *UserHandler) Get(writer http.ResponseWriter, request *http.Request) {
 func (h *UserHandler) Create(writer http.ResponseWriter, request *http.Request) {
 	var createUser model.User
 	json.NewDecoder(request.Body).Decode(&createUser)
-	h.Service.User.Create(createUser)
-	writer.Write([]byte("User created"))
+	_ = h.Service.User.Create(createUser)
+	_, _ = writer.Write([]byte("User created"))
 }
 
 func (h *UserHandler) Update(writer http.ResponseWriter, request *http.Request) {
-
+	var updateUser model.User
+	json.NewDecoder(request.Body).Decode(&updateUser)
+	_ = h.Service.User.Update(updateUser)
+	_, _ = writer.Write([]byte("User updated"))
 }
 
 func (h *UserHandler) Delete(writer http.ResponseWriter, request *http.Request) {
 	login := strings.TrimPrefix(request.URL.Path, "/api/users/")
-	h.Service.User.Delete(login)
-	writer.Write([]byte("User deleted"))
+	_ = h.Service.User.Delete(login)
+	_, _ = writer.Write([]byte("User deleted"))
 }
 
 func (h *UserHandler) GetAll(writer http.ResponseWriter, request *http.Request) {
 	res, _ := h.Service.User.GetAll()
-	json.NewEncoder(writer).Encode(res)
+	_ = json.NewEncoder(writer).Encode(res)
 }

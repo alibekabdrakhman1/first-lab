@@ -11,3 +11,8 @@ Content-Type: application/json
 	"login": "t",
 	"password": "qwerty123"
 }
+
+
+### GET request with a header
+GET http://localhost:8080/api/users/t
+Accept: application/json

@@ -3,6 +3,7 @@ package service
 import (
 	"github.com/alibekabdrakhman1/first-lab/internal/model"
 	"github.com/alibekabdrakhman1/first-lab/internal/storage"
+	"github.com/google/uuid"
 )
 
 type IUserService interface {
@@ -28,6 +29,7 @@ func (s *UserService) Get(login string) (model.User, error) {
 }
 
 func (s *UserService) Create(user model.User) error {
+	user.ID = uuid.New().String()
 	return s.repo.User.Create(user)
 }
 
